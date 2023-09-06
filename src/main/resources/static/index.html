@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Punkty</title>
+</head>
+<body>
+
+<canvas id="visibleCanvas" width="1080" height="1080" style="border:1px solid #000;"></canvas>
+<canvas id="bufferCanvas" width="1080" height="1080" style="display:none;"></canvas>
+
+<script>
+    // Pobieranie elementów canvas
+    var visibleCanvas = document.getElementById("visibleCanvas");
+    var bufferCanvas = document.getElementById("bufferCanvas");
+
+    var visibleCtx = visibleCanvas.getContext("2d");
+    var bufferCtx = bufferCanvas.getContext("2d");
+
+    function fetchAndDraw() {
+        // Pobranie punktów z serwera
+        fetch('/points')
+            .then(response => response.json())
+            .then(data => {
+                // Wyczyszczenie bufferCanvas
+                bufferCtx.clearRect(0, 0, bufferCanvas.width, bufferCanvas.height);
+
+                // Rysowanie punktów na bufferCanvas
+                data.forEach(point => {
+                    bufferCtx.fillStyle = 'black';
+                    bufferCtx.beginPath();
+                    bufferCtx.arc(point.globalX, point.globalY, 3, 0, Math.PI * 2);
+                    bufferCtx.fill();
+                });
+
+                // Kopiowanie bufferCanvas na visibleCanvas
+                visibleCtx.clearRect(0, 0, visibleCanvas.width, visibleCanvas.height);
+                visibleCtx.drawImage(bufferCanvas, 0, 0);
+            });
+    }
+
+    // Odpalenie funkcji fetchAndDraw co sekundę (1000 ms)
+    setInterval(fetchAndDraw, 4);
+</script>
+
+</body>
+</html>
