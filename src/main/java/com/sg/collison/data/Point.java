@@ -37,24 +37,32 @@ public class Point {
         this.dx = dx;
         this.dy = dy;
     }
+
     public void move(double width, double height) {
         this.globalX += this.dx;
         this.globalY += this.dy;
         if (this.globalX < 0) {
-            this.globalX = width;
+            this.globalX = width + this.globalX;
         }
         if (this.globalX > width) {
-            this.globalX = 0;
+            this.globalX = this.globalX - width;
         }
         if (this.globalY < 0) {
-            this.globalY = height;
+            this.globalY = height + this.globalY;
         }
         if (this.globalY > height) {
-            this.globalY = 0;
+            this.globalY = this.globalY - height;
         }
     }
+
     public Point(Long id) {
         this.id = id;
+    }
+
+    public Point(Long id, double globalX, double globalY) {
+        this.id = id;
+        this.globalX = globalX;
+        this.globalY = globalY;
     }
 
     public boolean isColliding(Point point, double width, double height, double radius) {
@@ -66,7 +74,7 @@ public class Point {
         double dx_w = minX1 + minX2;
 
         double distDx = Math.min(absDx, dx_w);
-        if (distDx > 2.0) {
+        if (distDx > radius) {
             return false;
         }
 
@@ -85,12 +93,10 @@ public class Point {
         return (distDx * distDx + distDy * distDy) <= radius * radius;
     }
 
-
-    // Gettery i Settery dla wszystkich właściwości
-
     public Long getId() {
         return id;
     }
+
     public double getGlobalX() {
         return globalX;
     }

@@ -1,13 +1,14 @@
 package com.sg.collison.manager;
 
 import com.sg.collison.data.Point;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class CenterOfMassCalculator {
-    public static List<Point> calculateCenterOfMass(List<Point> points, double width, double height) {
+    public static Point calculateCenterOfMass(Set<Point> points, double width, double height) {
         double sumSinX = 0.0, sumCosX = 0.0;
         double sumSinY = 0.0, sumCosY = 0.0;
 
@@ -25,11 +26,16 @@ public class CenterOfMassCalculator {
         double avgAngleX = Math.atan2(sumSinX, sumCosX);
         double avgAngleY = Math.atan2(sumSinY, sumCosY);
 
-        double centerX = ((avgAngleX / (2 * Math.PI)) * width + width) % width;
-        double centerY = ((avgAngleY / (2 * Math.PI)) * height + height) % height;
+        double centerX = modulo(((avgAngleX / (2 * Math.PI)) * width + width), width);
+        double centerY = modulo(((avgAngleY / (2 * Math.PI)) * height + height), height);
+        return new Point(0L, centerX, centerY, centerX, centerY, 0.0, 0.0);
+    }
 
-        List<Point> ret = new ArrayList<>(points.size());
-        System.out.println("Center of mass: " + centerX + ", " + centerY);
+    public static ImmutablePair<Set<Point>, Point> movePointsToCenterOfMass(Set<Point> points, double width, double height) {
+        Point center = calculateCenterOfMass(points, width, height);
+        double centerX = center.getGlobalX();
+        double centerY = center.getGlobalY();
+        Set<Point> ret = new HashSet<>(points.size());
         for (Point p : points) {
             double x = (p.getGlobalX() - centerX + 3 * width / 2) % width;
             double y = (p.getGlobalY() - centerY + 3 * height / 2) % height;
@@ -40,7 +46,15 @@ public class CenterOfMassCalculator {
             ret.add(newPoint);
         }
 
-        return ret;
+        return new ImmutablePair<>(ret, center);
+    }
+
+    public static double modulo(double x, double y) {
+        if (y == 0.0) {
+            throw new ArithmeticException("Modulo by zero");
+        }
+        double result = x - y * Math.floor(x / y);
+        return result;
     }
 
 

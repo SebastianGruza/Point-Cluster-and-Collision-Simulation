@@ -1,7 +1,6 @@
 package com.sg.collison;
 
 import com.sg.collison.manager.ClusterManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,13 +8,6 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class CollisonApplication {
-
-//	private final ClusterManager clusterManager;
-//
-//	@Autowired
-//	public CollisonApplication(ClusterManager clusterManager) {
-//		this.clusterManager = clusterManager;
-//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(CollisonApplication.class, args);

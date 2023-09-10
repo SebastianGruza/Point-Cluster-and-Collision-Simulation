@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sg</groupId>
-	<artifactId>collison</artifactId>
+	<artifactId>collision</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>collison</name>
 	<description>Demo project for Spring Boot</description>
@@ -33,6 +33,11 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.22</version> <!-- Użyj aktualnej wersji Lombok -->
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
 		</dependency>
 
 	</dependencies>
