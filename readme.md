@@ -48,9 +48,31 @@ git clone [URL to the repository]
 cd Point-Cluster-and-Collision-Simulation
 ```
 
-## Usage
+## Running the Simulation
 
-[Provide a brief overview of how to run the simulation or use the application.]
+Follow the steps below to run the simulation:
+
+1. Build the project:
+ ```
+mvn clean install
+ ```
+
+
+2. Copy the `application.properties` file to the same directory as your generated JAR:
+```
+cp path/to/application.properties ./path/to/jar/directory/
+```
+
+3Execute the generated JAR file:
+ ```
+java -jar [filename].jar
+ ```
+
+4. As the simulation runs, folders will be created in the working directory. These folders will contain image files representing consecutive frames of the simulation.
+
+## Example
+[![Collisions 100k points with donut](https://img.youtube.com/vi/Mejrnv0szqY/maxresdefault.jpg)](https://youtu.be/Mejrnv0szqY)
+
 
 ## License
 
