@@ -63,7 +63,7 @@ mvn clean install
 cp path/to/application.properties ./path/to/jar/directory/
 ```
 
-3Execute the generated JAR file:
+3.Execute the generated JAR file:
  ```
 java -jar [filename].jar
  ```
