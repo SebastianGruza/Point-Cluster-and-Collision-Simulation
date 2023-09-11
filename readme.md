@@ -35,12 +35,19 @@ The behavior of the simulation can be fine-tuned using the provided `.properties
 - `threads.number`: Specifies the number of threads used for parallel processing. Default value: `8`.
 - `threads.drawCount`: Dictates the maximum number of threads that can be engaged in drawing images simultaneously. Default value: `6`.
 
+
+## Prerequisites
+
+- **Java**: This project requires Java 11 or higher. Ensure you have the appropriate version installed. You can check your Java version by running `java -version`.
+- **Maven**: To build the project using the `mvn clean install` command, make sure you have Maven installed. You can verify your Maven installation by running `mvn -v`.
+
+
 ## Installation
 
 
 1. Clone the repository: 
 ```
-git clone [URL to the repository]
+git clone https://github.com/SebastianGruza/Point-Cluster-and-Collision-Simulation.git
 ```
 
 2. Navigate to the cloned directory:
@@ -60,15 +67,19 @@ mvn clean install
 
 2. Copy the `application.properties` file to the same directory as your generated JAR:
 ```
-cp path/to/application.properties ./path/to/jar/directory/
+cp src/main/resources/application.properties target
+```
+3. Navigate to the target directory:
+```
+cd target
 ```
 
-3.Execute the generated JAR file:
- ```
-java -jar [filename].jar
- ```
+4. Execute the generated JAR file:
+```
+java -jar collision-0.0.1-SNAPSHOT.jar
+```
 
-4. As the simulation runs, folders will be created in the working directory. These folders will contain image files representing consecutive frames of the simulation.
+5. As the simulation runs, folders will be created in the working directory. These folders will contain image files representing consecutive frames of the simulation.
 
 ## Example
 [![Collisions 100k points with donut](https://img.youtube.com/vi/Mejrnv0szqY/maxresdefault.jpg)](https://youtu.be/Mejrnv0szqY)
